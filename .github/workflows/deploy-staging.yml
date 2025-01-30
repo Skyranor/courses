@@ -33,4 +33,4 @@ jobs:
           user: ${{secrets.STAGING_SSH_USER}} # Remote server user - required
           private_key: ${{secrets.STAGING_SSH_PRIVATE_KEY}} # Private ssh key registered on the remote server - required
           host_fingerprint: ${{secrets.STAGING_SSH_FINGERPRINT}} # Public ssh key fingerprint, viewable via ssh-keyscan -H $HOST -p $PORT - optional
-          command: source ~/.nvm/nvm.sh; echo 'Hello world!'
+          command: source ~/.nvm/nvm.sh; ~/deploy.sh
