@@ -72,9 +72,11 @@ export function ComposeChildren({ children }: { children: ReactNode }) {
   );
 }
 
-type Fn<ARGS extends any[], R> = (...args: ARGS) => R;
+type Fn<ARGS extends unknown[], R> = (...args: ARGS) => R;
 
-export function useEventCallback<A extends any[], R>(fn: Fn<A, R>): Fn<A, R> {
+export function useEventCallback<A extends unknown[], R>(
+  fn: Fn<A, R>,
+): Fn<A, R> {
   const ref = useRef<Fn<A, R>>(fn);
   useEffect(() => {
     ref.current = fn;
