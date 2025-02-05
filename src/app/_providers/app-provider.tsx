@@ -4,7 +4,7 @@ import { ThemeProvider } from "@/features/theme/theme-provider";
 import { queryClient } from "@/shared/api/query-client";
 import { ComposeChildren } from "@/shared/lib/react";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { ReactNode } from "react";
+import { ReactNode, Suspense } from "react";
 
 export function AppProvider({ children }: { children: ReactNode }) {
   return (
@@ -17,6 +17,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
       />
       <AppSessionProvider />
       <QueryClientProvider client={queryClient} />
+      <Suspense />
       {children}
     </ComposeChildren>
   );
