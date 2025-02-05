@@ -1,4 +1,3 @@
-import { SignInForm } from "@/features/auth/sign-in-form.server";
 import { Card, CardHeader, CardContent } from "@/shared/ui/card";
 import Link from "next/link";
 
@@ -14,7 +13,7 @@ export default function SignIn() {
             </h1>
           </CardHeader>
           <CardContent className="grid gap-4">
-            <SignInForm />
+            {/* <SignInForm /> */}
             <p className="px-0 text-center text-sm text-muted-foreground">
               Нажимая продолжить вы соглашаетесь с{" "}
               <Link
