@@ -9,6 +9,11 @@ import { Adapter } from "next-auth/adapters";
 
 export const nextAuthConfig: AuthOptions = {
   adapter: PrismaAdapter(dbClient) as Adapter,
+  pages: {
+    signIn: "/auth/sign-in",
+    newUser: "/auth/new-user",
+    verifyRequest: "/auth/verify-request",
+  },
   providers: compact([
     EmailProvider({
       server: {
