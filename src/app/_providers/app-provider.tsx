@@ -2,7 +2,6 @@
 import { AppSessionProvider } from "@/entities/user/session.client";
 import { ThemeProvider } from "@/features/theme/theme-provider";
 import { queryClient } from "@/shared/api/query-client";
-import { createId } from "@/shared/lib/id";
 import { ComposeChildren } from "@/shared/lib/react";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactNode, Suspense } from "react";
