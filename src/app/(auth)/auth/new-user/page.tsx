@@ -1,39 +1,34 @@
-import { Card, CardHeader, CardContent } from "@/shared/ui/card";
-import Link from "next/link";
+// import { getAppSessionServer } from "@/entities/user/session.server";
+// import { UpdateProfileForm } from "@/features/update-profile/update-profile-form";
+import { Separator } from "@/shared/ui/separator";
+// import { redirect } from "next/navigation";
 
-export default function SignIn() {
+export default async function NewUserPage(
+  {
+    // searchParams,
+  }: {
+    searchParams: { callbackUrl?: string };
+  },
+) {
+  // const session = await getAppSessionServer();
+
+  // if (!session) {
+  //   return redirect("/auth/sign-in");
+  // }
+
   return (
-    <>
-      {" "}
-      <div className="container relative  flex-col items-center justify-center self-center pt-24">
-        <Card className="max-w-[350px] mx-auto">
-          <CardHeader className="flex flex-col space-y-2 text-center">
-            <h1 className="text-2xl font-semibold tracking-tight">
-              Войти в аккаунт
-            </h1>
-          </CardHeader>
-          <CardContent className="grid gap-4">
-            {/* <SignInForm /> */}
-            <p className="px-0 text-center text-sm text-muted-foreground">
-              Нажимая продолжить вы соглашаетесь с{" "}
-              <Link
-                href="/terms"
-                className="underline underline-offset-4 hover:text-primary"
-              >
-                Пользовательским соглашением
-              </Link>{" "}
-              и{" "}
-              <Link
-                href="/privacy"
-                className="underline underline-offset-4 hover:text-primary"
-              >
-                Политикой конфиденциальности
-              </Link>
-              .
-            </p>
-          </CardContent>
-        </Card>
+    <main className="space-y-6 py-14 container  max-w-[600px]">
+      <div>
+        <h3 className="text-lg font-medium">Последний шаг</h3>
+        <p className="text-sm text-muted-foreground">
+          Обновите профиль, это как другие пользователи увидят вас на сайте
+        </p>
       </div>
-    </>
+      <Separator />
+      {/* <UpdateProfileForm
+        userId={session.user.id}
+        callbackUrl={searchParams.callbackUrl}
+      /> */}
+    </main>
   );
 }

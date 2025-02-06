@@ -5,10 +5,30 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { dbClient } from "@/shared/lib/db";
 import { compact } from "lodash-es";
 import { privateConfig } from "@/shared/config/private";
-import { Adapter } from "next-auth/adapters";
+import { createUserUseCase } from "./_use-cases/create-user";
+import { Adapter, AdapterUser } from "next-auth/adapters";
+
+const prismaAdapter = PrismaAdapter(dbClient);
 
 export const nextAuthConfig: AuthOptions = {
-  adapter: PrismaAdapter(dbClient) as Adapter,
+  adapter: {
+    ...prismaAdapter,
+    createUser: (user: AdapterUser) => {
+      return createUserUseCase.execute(user);
+    },
+  } as unknown as Adapter,
+  callbacks: {
+    session: async ({ session, user }) => {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: user.id,
+          role: user.role,
+        },
+      };
+    },
+  },
   pages: {
     signIn: "/auth/sign-in",
     newUser: "/auth/new-user",
