@@ -1,8 +1,6 @@
 import { Separator } from "@/shared/ui/separator";
 
-export default async function NewUserPage({}: {
-  searchParams: { callbackUrl?: string };
-}) {
+export default async function NewUserPage() {
   return (
     <main className="space-y-6 py-14 container  max-w-[600px]">
       <div>

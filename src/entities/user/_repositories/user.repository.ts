@@ -3,7 +3,7 @@ import { UserEntity } from "../_domain/types";
 
 export class UserRepository {
   async createUser(user: UserEntity) {
-    await dbClient.user.create({
+    return await dbClient.user.create({
       data: user,
     });
   }
