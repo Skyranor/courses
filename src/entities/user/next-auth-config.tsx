@@ -18,7 +18,8 @@ export const nextAuthConfig: AuthOptions = {
     },
   } as unknown as Adapter,
   callbacks: {
-    session: async ({ session, user }) => {
+    session: async (data) => {
+      const { session, user } = data;
       return {
         ...session,
         user: {
