@@ -16,6 +16,8 @@ export const ProviderButton = ({
     switch (provider.id) {
       case "github":
         return <GithubIcon />;
+      default:
+        return null;
     }
   };
 
@@ -27,11 +29,7 @@ export const ProviderButton = ({
       onClick={() => oauthSignIn.signIn()}
     >
       {oauthSignIn.isPending ? (
-        <Spinner
-          color="#00FF00"
-          className="mr-2 h-4 w-4 animate-spin"
-          aria-label="Вход"
-        />
+        <Spinner className="mr-2 h-4 w-4 animate-spin" aria-label="Вход" />
       ) : (
         getIcon(provider)
       )}
