@@ -14,6 +14,7 @@ import {
 import { Input } from "@/shared/ui/input";
 import { Spinner } from "@/shared/ui/spinner";
 import { AvatarField } from "./avatar-field";
+import { Profile } from "@/entities/user/profile";
 
 const profileFormSchema = z.object({
   name: z
@@ -29,13 +30,20 @@ const profileFormSchema = z.object({
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
 export function ProfileForm({
   onSuccess,
+  profile,
   submitText = "Сохранить",
 }: {
+  profile: Profile;
   onSuccess?: () => void;
   submitText?: string;
 }) {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
+    defaultValues: {
+      email: profile.email,
+      name: profile.name ?? "",
+      image: profile.image ?? undefined,
+    },
   });
   return (
     <Form {...form}>
@@ -48,7 +56,7 @@ export function ProfileForm({
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="" {...field} value="example@email.com" />
+                <Input placeholder="" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
