@@ -28,6 +28,7 @@ export function UpdateProfileForm({
     <ProfileForm
       profile={profileQuery.data.profile}
       //onSuccess={handleSuccess}
+      userId={userId}
       submitText={callbackUrl ? "Продолжить" : "Сохранить"}
     />
   );

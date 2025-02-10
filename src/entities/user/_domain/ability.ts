@@ -6,3 +6,10 @@ export const createUserAbility = (session: SessionEntity) => {
       session.user.id === userId || session.user.role === ROLES.ADMIN,
   };
 };
+
+export const createProfileAbility = (session: SessionEntity) => {
+  return {
+    canUpdateProfile: (userId: UserId) =>
+      session.user.id === userId || session.user.role === ROLES.ADMIN,
+  };
+};
