@@ -2,7 +2,14 @@ import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  async rewrites() {
+    return [
+      {
+        source: "/storage/:path*",
+        destination: `${process.env.S3_ENDPOINT}/:path*`,
+      },
+    ];
+  },
 };
 
 export default withSentryConfig(nextConfig, {
@@ -11,13 +18,9 @@ export default withSentryConfig(nextConfig, {
 
   org: "aston-eo",
   project: "micro-courses",
-  
-
 
   // Only print logs for uploading source maps in CI
   silent: !process.env.CI,
-
-  
 
   // For all available options, see:
   // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
