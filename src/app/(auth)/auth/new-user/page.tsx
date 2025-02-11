@@ -3,9 +3,11 @@ import { UpdateProfileForm } from "@/features/update-profile/update-profile-form
 import { Separator } from "@/shared/ui/separator";
 import { redirect } from "next/navigation";
 
-export default async function NewUserPage(params: {
-  searchParams: { callbackUrl?: string };
-}) {
+export default async function NewUserPage(
+  params: Promise<{
+    searchParams: { callbackUrl?: string };
+  }>,
+) {
   const session = await getAppSessionStrictServer();
 
   if (!session) {
