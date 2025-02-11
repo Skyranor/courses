@@ -3,19 +3,17 @@ import { UpdateProfileForm } from "@/features/update-profile/update-profile-form
 import { Separator } from "@/shared/ui/separator";
 import { redirect } from "next/navigation";
 
-export default async function NewUserPage(
-  params: Promise<{
-    searchParams: { callbackUrl?: string };
-  }>,
-) {
+export default async function NewUserPage(props: {
+  searchParams?: Promise<{
+    callbackUrl?: string;
+  }>;
+}) {
   const session = await getAppSessionStrictServer();
 
   if (!session) {
     return redirect("auth/sign-in");
   }
-
-  const { searchParams } = await params;
-  const { callbackUrl } = await searchParams;
+  const { callbackUrl } = (await props.searchParams) ?? {};
   return (
     <main className="space-y-6 py-14 container  max-w-[600px]">
       <div>
