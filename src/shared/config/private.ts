@@ -17,6 +17,8 @@ const privateConfigSchema = z.object({
   S3_IMAGES_BUCKET: z.string(),
   S3_ENDPOINT: z.string(),
   S3_REGION: z.string(),
+
+  TEST_EMAIL_TOKEN: z.string().optional(),
 });
 
 export const privateConfig = privateConfigSchema.parse(process.env);
