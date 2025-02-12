@@ -15,6 +15,7 @@ export function UpdateProfileForm({
 }) {
   const profileQuery = useQuery({
     ...getProfileQuery(userId),
+    retry: 0,
   });
 
   const router = useRouter();
