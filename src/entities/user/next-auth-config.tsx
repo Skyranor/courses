@@ -1,6 +1,6 @@
 import { AuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
-import EmailProvider from "next-auth/providers/email";
+import EmailProvider, { EmailUserConfig } from "next-auth/providers/email";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { dbClient } from "@/shared/lib/db";
 import { compact } from "lodash-es";
@@ -9,6 +9,18 @@ import { createUserUseCase } from "./_use-cases/create-user";
 import { Adapter, AdapterUser } from "next-auth/adapters";
 
 const prismaAdapter = PrismaAdapter(dbClient);
+
+const emailToken: Pick<
+  EmailUserConfig,
+  "generateVerificationToken" | "sendVerificationRequest"
+> = privateConfig.TEST_EMAIL_TOKEN
+  ? {
+      generateVerificationToken: () => privateConfig.TEST_EMAIL_TOKEN ?? "",
+      sendVerificationRequest: () => {
+        console.log("we don't send emails in test mode");
+      },
+    }
+  : {};
 
 export const nextAuthConfig: AuthOptions = {
   adapter: {
@@ -37,6 +49,7 @@ export const nextAuthConfig: AuthOptions = {
   },
   providers: compact([
     EmailProvider({
+      ...emailToken,
       server: {
         host: privateConfig.EMAIL_SERVER_HOST,
         port: Number(privateConfig.EMAIL_SERVER_PORT),

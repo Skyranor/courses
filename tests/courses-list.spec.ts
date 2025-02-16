@@ -12,11 +12,13 @@ test("test", async ({ page }) => {
   await page
     .locator("div")
     .filter({ hasText: /^какое-то названиеОписпние 1Card ContentУдалить$/ })
-    .getByRole("button")
+    .getByRole("button", { name: "Удалить" })
+    .last()
     .click();
   await expect(
     page
       .locator("div")
-      .filter({ hasText: /^какое-то названиеОписпние 1Card ContentУдалить$/ }),
+      .filter({ hasText: /^какое-то названиеОписпние 1Card ContentУдалить$/ })
+      .last(),
   ).not.toBeVisible();
 });
