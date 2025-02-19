@@ -2,6 +2,7 @@ import { cache } from "react";
 
 import { CourseEntity } from "../_domain/types";
 import { contentApi } from "@/shared/api/content";
+import { logger } from "@/shared/lib/logger";
 
 class CoursesRepository {
   getCoursesList = cache(async (): Promise<CourseEntity[]> => {
@@ -22,8 +23,13 @@ class CoursesRepository {
       manifest.courses.map(fetchCourse),
     );
 
-    settledCourses.forEach((course) => {
+    settledCourses.forEach((course, i) => {
       if (course.status === "rejected") {
+        logger.error({
+          msg: "Course by slug not found",
+          slug: manifest.courses[i],
+          error: course.reason,
+        });
       }
     });
 
