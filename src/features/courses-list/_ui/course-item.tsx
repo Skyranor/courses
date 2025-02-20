@@ -1,15 +1,17 @@
 "use client";
-import { Card, CardHeader, CardTitle, CardDescription } from "@/shared/ui/card";
-
 import { CourseEntity } from "@/entities/course/course";
+import { useMdxComponent } from "@/shared/lib/mdx";
+import { Card, CardHeader, CardTitle } from "@/shared/ui/card";
 
-export const CourseItem = ({ course }: { course: CourseEntity }) => {
+export function CourseItem({ course }: { course: CourseEntity }) {
+  const Description = useMdxComponent(course.description);
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>{course.title}</CardTitle>
-        <CardDescription>{course.description}</CardDescription>
+        <Description size="sm" />
       </CardHeader>
     </Card>
   );
-};
+}
