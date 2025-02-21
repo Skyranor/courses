@@ -10,7 +10,6 @@ export type Cuid = string;
 export interface Lesson {
   id: Cuid;
   title: string;
-  shortDescription?: string;
   blocks: (TextBlock | VideoBlock | QuestionBlock)[];
 }
 export interface TextBlock {

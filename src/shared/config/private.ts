@@ -19,6 +19,9 @@ const privateConfigSchema = z.object({
   S3_REGION: z.string(),
 
   TEST_EMAIL_TOKEN: z.string().optional(),
+
+  CONTENT_URL: z.string(),
+  CONTENT_TOKEN: z.string().optional(),
 });
 
 export const privateConfig = privateConfigSchema.parse(process.env);
